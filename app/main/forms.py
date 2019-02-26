@@ -16,8 +16,8 @@ class PitchForm(FlaskForm):
     content = TextAreaField('YOUR PITCH')
     submit = SubmitField('Create Pitch')
 
-class UpvoteForm(FlaskForm):
-    '''
-    Class to create a wtf form for upvoting a pitch
-    '''
-    submit = SubmitField('Upvote')
+# class UpvoteForm(FlaskForm):
+#     '''
+#     Class to create a wtf form for upvoting a pitch
+#     '''
+#     submit = SubmitField('Upvote')
