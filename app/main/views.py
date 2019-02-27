@@ -27,6 +27,7 @@ def index():
     # pitches= Pitch.get_all_pitches()
     
     return render_template('index.html', title = title)
+    
 
 
 
@@ -87,4 +88,3 @@ def view_comments(id):
     '''
     comments = Comment.get_comments(id)
     return render_template('view_comments.html',comments = comments, id=id)
-
