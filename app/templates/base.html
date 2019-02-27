@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        {% if title %}
-        <title> {{ title }}</title>
-        {% else %}
-        <title> Welcome to the best pitch website </title>
-        {% endif %} 
-        {% extends 'bootstrap/base.html'%}
+{% extends 'bootstrap/base.html'%}
 
-        <!-- Navbar block  --> 
-        {% block navbar %}
-            {% include 'navbar.html' %}
-        {% endblock %}
-    </head>
-    <body>
-        <!-- Content block -->
+<!-- Navbar block  --> 
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock %}
 
-        {% block content %}
+{%block styles %}
+{{super()}}
+<!--Importing the simple mde css and js files  -->
+{{ simplemde.css}}
+{{ simplemde.js }}
 
-        {% endblock%}
-    </body>
-</html>
+{% endblock %}
