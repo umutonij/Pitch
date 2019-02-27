@@ -8,25 +8,14 @@ from .. import db,photos
 
 
 
-# Views
 @main.route('/')
 def index():
-
-    '''
-    View root page function that returns the index page and its data
-    '''
-
-    # Getting popular movie
-    # popular_movies = get_movies('popular')
-    # upcoming_movie = get_movies('upcoming')
-    # now_showing_movie = get_movies('now_playing')
-
-    title = 'Home- Welcome to The best Pitching Website Online'
-
-    # search_pitch = request.args.get('pitch_query')
-    # pitches= Pitch.get_all_pitches()
+    pickup = Pitch.get_pitches('pickup')
+    interview = Pitch.get_pitches('interview')
+    product = Pitch.get_pitches('product')
     
-    return render_template('index.html', title = title)
+
+    return render_template('index.html', title = 'Pitch App - Home', pickup = pickup, interview = interview,  product = product)
     
 
 
