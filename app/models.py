@@ -4,6 +4,10 @@ from flask_login import UserMixin
 from . import login_manager
 from datetime import datetime
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))   
+    
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
@@ -11,10 +15,11 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
-    pitches = db.relationship('Pitch',backref = 'user',lazy="dynamic")
+    pitches = db.relationship('Pitch', backref ='pitch',lazy="dynamic")
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
+    comments = db.relationship('Comment', backref ='comments',lazy = "dynamic")
 
     @property
     def password(self):
@@ -23,10 +28,7 @@ class User(UserMixin,db.Model):
     @password.setter
     def password(self, password):
         self.pass_secure = generate_password_hash(password)
-        
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
+    
 
     def verify_password(self,password):
         return check_password_hash(self.pass_secure,password)
@@ -40,23 +42,52 @@ class Pitch(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(255)) 
     category= db.Column(db.String(255))
-    comments = db.relationship('Comment',backref = 'pitches',lazy="dynamic")
+    comment_pitch = db.relationship('Comment', backref ='comment_pitch',lazy = "dynamic")
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
-    def __repr__(self):
-        return f'User {self.name}'
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_pitches(cls,category):
+        pitches = Pitch.query.filter_by(category=category).all()
+        return pitches
+
+    @classmethod
+    def get_pitch(cls,id):
+        pitch = Pitch.query.filter_by(id=id).first()
+
+        return pitch
+
+    @classmethod
+    def count_pitches(cls,uname):
+        user = User.query.filter_by(username=uname).first()
+        pitches = Pitch.query.filter_by(user_id=user.id).all()
+
+        pitches_count = 0
+        for pitch in pitches:
+            pitches_count += 1
+
+        return pitches_count
 
 class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255)) 
+    comment = db.Column(db.String(255)) 
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
   
 
-    def __repr__(self):
-        return f'User {self.name}'
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls,pitch):
+        comments = Comment.query.filter_by(pitch_id=pitch).all()
+        return comments
 
 # class Review(db.Model):
 
