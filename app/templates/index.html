@@ -1,99 +1,55 @@
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        {% if title %}
-        <title> {{ title }}</title>
-        {% else %}
-        <title> Welcome to the Pitch </title>
-        {% endif %}
-        {% extends 'base.html'%}
-        {% import 'macros.html' as macro%}
-
-<!-- Styles block -->
-
-        {% block styles%}
-        {{ super() }}
-        <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
-        {% endblock %}
-        
-    </head>
-  
-    <body>
-   
-
-    <!-- Content block -->
-   
-    {% block content %}
-    <div class="jumbotron">
-        <h1 style="text-align:center; padding-top: 50px; color: teal;">WELCOME TO THE PITCH ONLINE APPLICATION</h1>
-
-    </div>
-
-
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"> 
-                <a href="{{url_for('main.profile',uname=current_user.username)}}" style="font-family: 'Joti One', cursive; font-size:20px;">
-                    <br>
-                    Inteview Pitches
-                </a>
-                <br>
-                <a href="{{url_for('main.profile',uname=current_user.username)}}" style="font-family: 'Joti One', cursive; font-size:20px;">
-                    <br>
-                    Pick Up Lines
-                </a>
-                <br>
-                <a href="{{url_for('main.profile',uname=current_user.username)}}" style="font-family: 'Joti One', cursive; font-size:20px;">
-                    <br>
-                    Product Pitches
-                </a>
-                <br>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
-        <div class="panel style="style="border: 3px solid #f2f2f2; padding:20px; margin-top:10px;">
-            <p style="font-family: 'Bellefair', serif; font-size:20px;">Write your one minute in any of the categories to the left and let other user vote and comment on it.Please also feel free to comment and vote on pitches posted by other people </p>
-            
-            <div style="text-align:center;">
-                <a href="{{url_for('main.profile',uname=current_user.username)}}">
-                    <br>
-                    <span >Add a new Pitch</span>
-                </a>
-    
-            </div>
-        
-        </div>
-        
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
-        <div class="panel style="style="border: 3px solid #f2f2f2; padding:20px; margin-top:10px;">
-            <p style="font-family: 'Bellefair', serif; font-size:20px;">When Jesus said yes no body can say no </p>
-            
-            <div style="text-align:center;">
-                <a href="{{url_for('main.profile',uname=current_user.username)}}">
-                    <br>
-                    <span >Add a Comment</span>
-                </a>
-    
-            </div>
-        
-        </div>
-        
-    </div>
-</hr>
-<div class="all-pitches">
-    <span style="color:gainsboro;">All pitches are displayed below</span>
-        <hr> 
-        {{macro.displayPitches(pitches)}}
-    
-
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+<!-- Content block -->
+{%block content%}
+<div class="jumbotron text-center" style="background-color:darkslategrey; color: #fff; margin: 10px -100px 30px -100px;">
+    <h1>Pitch App</h1>
 </div>
 
-
-
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well well-lg">
+                <h3 style="color: #372e5f;" class="text-center">Interview Pitches</h3>
+                <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4"><a href="{{url_for('main.interview')}}" class="btn -center" style="background-color: #372e5f; color: #fff;">View Pitches</a></div>
+                  <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well well-lg">
+                <h3 style="color: #372e5f;" class="text-center">Product Pitches</h3>
+                <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4"><a href="{{url_for('main.product')}}" class="btn -center" style="background-color: #372e5f; color: #fff;">View Pitches</a></div>
+                  <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+          <div class="well well-lg">
+              <h3 style="color: #372e5f;" class="text-center">Promotion Pitches</h3>
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"><a href="{{url_for('main.promotion')}}" class="btn -center" style="background-color: #372e5f; color: #fff;">View Pitches</a></div>
+                <div class="col-md-4"></div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="well well-lg">
+              <h3 style="color: #372e5f;" class="text-center">Pickup Lines Pitches</h3>
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"><a href="{{url_for('main.pickup_up_lines')}}" class="btn -center" style="background-color: #372e5f; color: #fff;">View Pitches</a></div>
+                <div class="col-md-4"></div>
+              </div>
+          </div>
+      </div>
+    </div>
 </div>
-    
-    {% endblock%}
-       
-</body>
-</html>
+{%endblock%}
