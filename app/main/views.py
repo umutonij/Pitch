@@ -3,18 +3,18 @@ from . import main
 from ..models import User,Pitch,Comment
 from .. import db,photos
 from .forms import UpdateProfile,PitchForm,CommentForm
-from flask_login import login_required,current_user
+from flask_login import current_user,login_required
 import datetime
 
 
 @main.route('/')
 def index():
-    pickup = Pitch.get_pitches('pickup')
-    interview = Pitch.get_pitches('interview')
-    product = Pitch.get_pitches('product')
-    promotion = Pitch.get_pitches('promotion')
+#     pickup_up_lines = Pitch.get_pitches('pickup')
+#     interview = Pitch.get_pitches('interview')
+#     product = Pitch.get_pitches('product')
+#     promotion = Pitch.get_pitches('promotion')
 
-    return render_template('index.html', title = 'Pitch App - Home', pickup = pickup, interview = interview, promotion = promotion, product = product)
+    return render_template('index.html', title = 'Pitch App - Home')
 
 @main.route('/pitches/pickup')
 def pickup():
