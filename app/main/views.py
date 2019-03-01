@@ -94,8 +94,9 @@ def new_pitch():
         title = form.title.data
         pitch = form.text.data
         category = form.category.data
+        
 
-        new_pitch = Pitch(pitch_title = title,pitch_content = pitch, category = category,user = current_user,likes = 0, dislikes = 0)
+        new_pitch = Pitch(pitch_title = title,pitch_content = pitch, category = category)
         new_pitch.save_pitch()
         return redirect(url_for('main.index'))
 
@@ -141,3 +142,22 @@ def user_pitches(uname):
     pitch_count = Pitch.count_pitches(uname)
 
     return render_template('profile/pitches.html', user = user, pitches = pitches, pitches_count = pitch_count)
+@main.route('/newComment/<int:id>', methods = ['GET','POST'])
+@login_required
+def form(id):
+    # pitch = Pitch.query.filter_by(id = id).first()
+    # if pitch is None:
+    #     abort(404)
+
+    form = CommentForm()
+
+    if form.validate_on_submit():
+        comment = form.text.data
+
+        new_comment = Comment(comment = comment, user_id = current_user.id, pitch_id = id)
+
+        new_comment.save_comment()
+        return redirect(url_for('.index'))
+   
+
+    return render_template('new_coment.html', form = form)
