@@ -9,12 +9,12 @@ import datetime
 
 @main.route('/')
 def index():
-#     pickup_up_lines = Pitch.get_pitches('pickup')
-#     interview = Pitch.get_pitches('interview')
-#     product = Pitch.get_pitches('product')
-#     promotion = Pitch.get_pitches('promotion')
+    pickup = Pitch.get_pitches('pickup')
+    interview = Pitch.get_pitches('interview')
+    product = Pitch.get_pitches('product')
+    promotion = Pitch.get_pitches('promotion')
 
-    return render_template('index.html', title = 'Pitch App - Home')
+    return render_template('index.html', title = 'Pitch App - Home', pickup = pickup, interview = interview, promotion = promotion, product = product)
 
 @main.route('/pitches/pickup')
 def pickup():
