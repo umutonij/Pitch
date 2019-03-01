@@ -1,22 +1,14 @@
-{% extends 'base.html'%}
-{% import 'macros.html' as macro%}
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
 
-
-
-{% block content %}
-
-    <div class="container">
-        <h3>Pick Up Lines</h3>
-        <a href="{{url_for('main.new_pitch')}}">
-            <br>
-            Add a new Pitch
-        </a>
-
-        <hr>
-        
-            {{macro.displayPitchesInCategories(pitches,2)}}
-        <hr>
-    
+{%block content%}
+<div class="jumbotron text-center" style="background-color: rgb(5, 122, 158); color: #fff; padding: 50px 25px">
+    <h1>Pick Up Lines</h1>
+</div>
+<div class="container">
+    <hr>
+    <div class="row">
+        {{macro.displayPitches(pitches)}}
     </div>
-
-{% endblock %}
+</div>
+{%endblock%}
