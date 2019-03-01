@@ -44,6 +44,9 @@ class Pitch(db.Model):
     category= db.Column(db.String(255))
     comment_pitch = db.relationship('Comment', backref ='comment_pitch',lazy = "dynamic")
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    pitch_title=  db.Column(db.String(255))
+    pitch_content=  db.Column(db.String(255))
+    
 
     def save_pitch(self):
         db.session.add(self)
