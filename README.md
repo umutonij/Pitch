@@ -23,7 +23,7 @@ This is an app that allows users to create,submit pitches based on categories. 2
 
 ## Installation steps
 
-* $ git clone https://github.com/umutonij/Pitch.git
+* $ git clone https://pitch-appl.herokuapp.com/
 * $ cd Pitch
 * $ source virtual/bin/activate
 * $ ./start.sh
